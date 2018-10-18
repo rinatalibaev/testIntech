@@ -51,10 +51,11 @@ public class WebSecurityController extends WebSecurityConfigurerAdapter {
 		 
 		 http
 	        .authorizeRequests()                                                                
-	            .antMatchers("/documents/**","/resources/**", "/signup", "/about").permitAll()
+	            .antMatchers("/resources/**", "/signup", "/about").permitAll()
 	            .antMatchers("/administrator/**").hasRole("ADMIN") 
 	            .antMatchers("/users/**").hasRole("ADMIN")
-	            .antMatchers("/documents/**").hasRole("ADMIN") 
+	            .antMatchers("/documents/deleteDocument/**").hasRole("ADMIN")
+	            .antMatchers("/documents/updateDocument/**").hasRole("ADMIN")
 	            .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 	            .anyRequest().authenticated()
 	        .and()
