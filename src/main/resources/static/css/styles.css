@@ -1,0 +1,192 @@
+body {
+	padding: 20px;
+	background-color:#ececec;
+}
+
+#docTable{
+	border: 1px solid grey;
+	width:100%;
+}
+
+#docTable td {
+	border: 1px solid grey;
+	padding: 3px;
+}
+
+table{
+	border: 1px solid grey;
+	width:100%;
+}
+
+table td, th {
+	border: 1px solid grey;
+	padding: 3px;
+}
+
+#plusPict  {
+	width: 50px;
+	height: 50px;
+}
+
+#editPict {
+	margin-left: 10px;
+	width: 35px;
+	
+}
+
+#deletePict, #findPict {
+	margin-left: 10px;
+	width: 30px;
+	
+}
+
+
+
+
+#addDocBtn,#editBtn,#deleteBtn,#findBtn {
+	background-color: transparent;
+	border: none;
+	text-align: center;
+	padding-left:0px;display: inline-block;
+	padding-right:0px;
+	height: 55px;
+}
+
+.actionBtns {
+	background-color: #BBBBBB;
+	display: inline-block;
+	border-radius: 2px;
+	margin: 2px 1px;
+	float: right;
+}
+
+.confirmationDiv {
+	display: inline-block;
+	background: green;
+	position:fixed;
+	z-index: 9;
+	width: 50%;
+	height: 50%;
+	margin: 20%;
+}
+
+#confirmYes {
+	position:fixed;
+	z-index: 10;
+    left: 40%;
+	top: 40%;
+}
+
+#confirmNo {
+	position:fixed;
+	z-index: 10;
+    left: 50%;
+	top: 40%;
+}
+
+.actionBtns:hover {
+	background-color: #DDDDDD;
+	display: inline-block;
+	border-radius: 2px;
+	margin: auto 1px;
+	float: right;
+}
+
+#addDocBtn,#plusPict,#editBtn, #findBtn, #findBtn:hover {
+	cursor:pointer;
+}
+
+#buttonsDiv {
+	display: inline-block;
+	width: 100%;
+}
+
+#id,#title,#author,#src,#createTime,#editTime {
+/* 	position: absolute; */
+	merge-bottom: 10px;
+	left: 350px;
+}
+
+.buttons {
+	width: 8%;
+	background-color: #BBBBBB;
+	text-align:center;
+	border-radius: 2px;
+	margin: 2px 1px;
+	
+}
+
+.buttons:hover {
+	background-color: #DDDDDD;
+	border-radius: 3px;
+	margin: auto 1px;
+	cursor:pointer;
+}
+
+
+.editInputFields, .addInputFields {
+	position: absolute;
+	left: 100px;
+}
+
+.editInputDivs, .addInputDivs {
+	margin-top: 10px;
+	
+}
+
+.dialogWindow {
+	background-color: #17cf5d;
+	border-radius: 2px;
+}
+
+.disabledDiv {
+    pointer-events: none;
+    opacity: 0.4;
+    margin-top: 10px;
+}
+
+hr {
+	 color: #DDDCCC;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 10000;
+}
+.popup {
+  width: 98%;
+  padding: 15px;
+  left: 0;
+  margin-left: 1%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  position: absolute;
+  top: -100%;
+  box-shadow: 5px 5px 5px #000;
+  z-index: 10001;
+}
+@media (min-width: 768px) {
+  .popup {
+    width: 66.66666666%;
+    margin-left: 16.666666%;
+  }
+}
+@media (min-width: 992px) {
+  .popup {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .popup {
+    width: 33.33333%;
+    margin-left: 33.33333%;
+  }
+}
