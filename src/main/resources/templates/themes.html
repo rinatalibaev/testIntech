@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Темы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<!--Форма логаута-->
+<div class="logoutFormWrapper" align="right">
+    <form action="/logout" method="post">
+        <input type="submit" value="Выйти" class="btn btn-info btn-lg"/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+</div>
+<div class="container">
+    <div class="page-name">
+        <h1 class="display-4">Форум о животных</h1>
+    </div>
+    <div class="mx-auto" style="width: 95%;">
+        <!--Кнопка создания новой темы-->
+        <button class="btn btn-success nBtn">Новая тема</button>
+        <!--Блок тем-->
+        <div class="main" style="background-color: white">
+            <div id="theme_table">
+                <table class="table table-dark table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th> Название темы </th>
+                        <th> Автор </th>
+                        <th> Дата создания </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${themes}">
+                        <td><a th:style="${'color: white;'}" th:href="@{'/messages/' + ${item.id}}"><span th:text="${item.theme_name}"> Theme name </span></a></td>
+                        <td width="15%"><span th:text="${item.getThemeAuthor().getUsername()}"> Theme author </span></td>
+                        <td width="20%"><span th:text="${#temporals.format(item.getCreatedTimeStamp(), 'dd-MM-yyyy HH:mm')}"></span></td>
+                        <td width="13%">
+                            <a th:if="${currentUserRole} == 'ROLE_ADMIN'" class="btn btn-danger delThemeBtn" th:onclick="'deleteTheme(' + ${item.getId()} + ')'">Удалить</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr/>
+
+                <!--Пэйджинация-->
+                <ul class="nav nav-pills">
+                    <li class="nav-item" th:each="i: ${#numbers.sequence(1,themes.getTotalPages())}">
+                        <a th:if="${i}!=0" th:href="'?page=' + (${i}-1)" th:text="${i}" class="nav-link"
+                           th:classappend="${currentPage}==(${i}-1)?'active':''">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--Форма создания новой темы-->
+    <div class="newThemeForm">
+        <form th:action="'/themes/save'" method="post">
+            <div class="modal fade" id="newThemeModal" tabindex="-1" role="dialog" aria-labelledby="newThemeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Создать тему</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="newThemeName" name="newThemeName" placeholder="Введите название темы" aria-label="Введите название темы" aria-describedby="basic-addon2" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <button type="submit" class="btn btn-primary">Создать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script th:src="@{/js/script.js}" src="/static/js/script.js"></script>
+</body>
+</html>
